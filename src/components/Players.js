@@ -1,0 +1,28 @@
+import { Avatar, Box, Button, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
+import React, { useState } from 'react'
+import FaceIcon from '@mui/icons-material/Face';
+const Players = ({players}) => {
+
+    return (
+        <Box sx={{height:'75%', width:'40%', border:'2px solid black'}}>
+            <List>
+                {players.map((player,index)=>{
+                    return(
+                        <ListItem key={index}>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <FaceIcon/>
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText>
+                                {player}
+                            </ListItemText>
+                        </ListItem>
+                    )
+                })}
+            </List>
+        </Box>
+    )
+}
+
+export default Players
