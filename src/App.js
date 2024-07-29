@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import DashBoard from "./pages/DashBoard";
 import Lobby from "./pages/Lobby";
 import Game from "./pages/Game";
+import { socket } from "./socket";
 
 function App() {
   

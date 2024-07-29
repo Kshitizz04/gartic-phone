@@ -3,6 +3,7 @@ import React from 'react'
 import ReactPainter from "react-painter";
 import styled from 'styled-components';
 import Players from '../components/Players';
+import Canvas from '../components/Canvas';
 
 const MainBox = styled(Box)({
     height: '90%',
@@ -16,7 +17,8 @@ const MainBox = styled(Box)({
 const Game = () => {
     return(
         <MainBox>
-            game
+            <Players/>
+            <Canvas/>
         </MainBox>
     )
 }

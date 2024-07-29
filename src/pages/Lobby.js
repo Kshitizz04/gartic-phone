@@ -1,10 +1,8 @@
 import { Box } from '@mui/material'
-import React, { useState } from 'react'
+import React from 'react'
 import Players from '../components/Players'
-import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import RoomSelection from '../components/RoomSelection'
-import { socket } from '../socket'
 
 const MainBox = styled(Box)({
     height: '90%',
@@ -16,20 +14,10 @@ const MainBox = styled(Box)({
 })
 
 const Lobby = () => {
-    const location = useLocation();
-    const [playerList, setPlayerList] = useState([])
-
-    socket.on('lobbyUpdate', (data)=>{
-        setPlayerList(data) 
-    })
-
-    console.log(playerList)
-
-
     return (
         <MainBox>
-            <Players players={playerList}/>
-            <RoomSelection name={location.state.name}/>
+            <Players/>
+            <RoomSelection/>
         </MainBox>
     )
 }

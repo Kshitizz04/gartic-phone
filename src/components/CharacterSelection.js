@@ -1,10 +1,12 @@
 import { Box, Button, Card, CardActions, CardContent, CardMedia, IconButton, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import {  useNavigate } from 'react-router-dom'
+import { useSelf } from '../app-state/store'
 
 const CharacterSelection = () => {
     const navigate = useNavigate()
-    const [name,setName] = useState("")
+    let name = ""
+    const setName = useSelf((state)=>{return state.setName})
 
     return (
         <Box sx={{height:'75%', width:'40%', border:'2px solid black'}}>
@@ -21,13 +23,13 @@ const CharacterSelection = () => {
                         autoFocus
                         label="Name..."
                         sx={{ width: '100%' }}
-                        value={name}
-                        onChange={(e)=>{setName(e.target.value)}}
+                        onChange={(e)=>{name = e.target.value}}
                         InputProps={{
                             endAdornment: 
                                 <IconButton 
                                     onClick={()=>{
-                                        navigate('/lobby',{state:{name:name}})
+                                        setName(name)
+                                        navigate('/lobby')
                                     }}
                                 >   
                                     Start

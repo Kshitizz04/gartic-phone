@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { socket } from '../socket'
 import { useNavigate } from 'react-router-dom'
+import { useRoom, useSelf } from '../app-state/store'
 
 const MainBox = styled(Box)({
   height: '90%',
@@ -14,25 +15,37 @@ const MainBox = styled(Box)({
   alignItems: 'center',
 })
 
-const RoomSelection = ({name}) => {
+const RoomSelection = () => {
 
   const [createCode,setCreateCode] = useState(0)
   const [joinCode,setJoinCode] = useState(0)
   const [isInRoom,setIsINRoom] = useState(false)
   const navigate = useNavigate()
+  const name = useSelf((state)=>{return state.name})
+  const setCode = useRoom((state)=>{return state.setCode})
 
   const handleCreateRoom = (e) => {
     setCreateCode(e.target.value)
     socket.connect()
     socket.emit('createRoom',{name: name,code:createCode},(data)=>{
-      data ? setIsINRoom(!isInRoom) : console.error('room already exists')
+      if(data){
+        setIsINRoom(!isInRoom)
+        setCode(createCode)
+      }else{
+        console.error('room already exists')
+      }
     })
   }
   const handleJoinRoom = (e) => {
     setJoinCode(e.target.value)
     socket.connect()
     socket.emit('joinRoom',{name: name,code:joinCode},(data)=>{
-      data ? setIsINRoom(!isInRoom) : console.error('room does not exist')
+      if(data){
+        setIsINRoom(!isInRoom)
+        setCode(joinCode)
+      }else{
+        console.error('room already exists')
+      }
     })
   }
   

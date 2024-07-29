@@ -21,7 +21,7 @@ io.on('connection',(socket)=>{
 				{code: data.code, players: [data.name]}
 			)
 			socket.join(data.code);
-			io.in(data.code).emit('lobbyUpdate', rooms[0].players)
+			io.in(data.code).emit('lobbyUpdate', rooms[0].players) 
 			cb(true);
 			
 		} 
@@ -34,11 +34,11 @@ io.on('connection',(socket)=>{
 		if(success==-1){ 
 			cb(false);
 		}
-		else{ 
+		else{  
 			rooms[success].players.push(data.name);
 			socket.join(data.code);
 			io.in(data.code).emit('lobbyUpdate', rooms[success].players)  
 			cb(true);
 		} 
 	})
-})
+})  

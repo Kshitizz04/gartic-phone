@@ -23,7 +23,7 @@ const DashBoard = () => {
                 <CharacterSelection/>
                 <Rules/>
             </Box>
-        </MainBox>
+        </MainBox> 
     )
 }
 
