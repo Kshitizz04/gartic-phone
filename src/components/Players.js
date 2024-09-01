@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
+import { Avatar, Box, Button, IconButton, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
 import React, { useState } from 'react'
 import FaceIcon from '@mui/icons-material/Face';
 import { useRoom } from '../app-state/store';
@@ -10,8 +10,7 @@ const Players = () => {
 
     socket.on('lobbyUpdate', (data)=>{
         setPlayers(data) 
-      })
-       console.log(players)
+    })
 
     return (
         <Box sx={{height:'75%', width:'40%', border:'2px solid black'}}>
@@ -25,7 +24,7 @@ const Players = () => {
                                 </Avatar>
                             </ListItemAvatar>
                             <ListItemText>
-                                {player}
+                                {player.name}
                             </ListItemText>
                         </ListItem>
                     )

@@ -5,50 +5,45 @@ import { socket } from '../socket'
 import { useNavigate } from 'react-router-dom'
 import { useRoom, useSelf } from '../app-state/store'
 
-const MainBox = styled(Box)({
-  height: '90%',
-  width: '80%',
-  border: '1px solid',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-})
-
 const RoomSelection = () => {
 
   const [createCode,setCreateCode] = useState(0)
   const [joinCode,setJoinCode] = useState(0)
-  const [isInRoom,setIsINRoom] = useState(false)
+  const [isInRoom,setIsInRoom] = useState(false)
   const navigate = useNavigate()
   const name = useSelf((state)=>{return state.name})
   const setCode = useRoom((state)=>{return state.setCode})
+  const setId = useSelf((state)=>{return state.setId})
 
   const handleCreateRoom = (e) => {
     setCreateCode(e.target.value)
     socket.connect()
     socket.emit('createRoom',{name: name,code:createCode},(data)=>{
-      if(data){
-        setIsINRoom(!isInRoom)
+      if(data==0){
+        setIsInRoom(!isInRoom)
         setCode(createCode)
+        console.log(data)
+        setId(data)
       }else{
         console.error('room already exists')
       }
     })
   }
   const handleJoinRoom = (e) => {
-    setJoinCode(e.target.value)
     socket.connect()
     socket.emit('joinRoom',{name: name,code:joinCode},(data)=>{
-      if(data){
-        setIsINRoom(!isInRoom)
+      if(data!=-1){
+        console.error('running set',isInRoom)
+        setIsInRoom(!isInRoom)
         setCode(joinCode)
+        console.log(data)
+        setId(data)
       }else{
-        console.error('room already exists')
+        console.error('room does not exist')
       }
     })
   }
-  
+
   const handlePlay = () => {
     isInRoom ? navigate('/game') : console.error('You are not in a room')
   }
