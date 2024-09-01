@@ -1,6 +1,5 @@
 import { Box, IconButton, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react'
-import ReactPainter from "react-painter";
 import styled from 'styled-components';
 import Players from '../components/Players';
 import Canvas from '../components/Canvas';
@@ -35,7 +34,7 @@ const Game = () => {
     const ImgDisplay = ()=>{
         return(
             <Box>
-                <img src={game.image}/>
+                <img src={game.image} alt=''/>
             </Box>
         )
     }
@@ -79,10 +78,10 @@ const Game = () => {
     }
 
     socket.on('recieveCanvas', (data)=>{
-        if((data.id==numPlayers-1) && id==0){
+        if((data.id===numPlayers-1) && id==0){
             game.setImage(data.url)
         }
-        else if(id == data.id+1){
+        else if(id === data.id+1){
             game.setImage(data.url)
         }
     })

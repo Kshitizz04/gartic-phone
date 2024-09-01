@@ -1,6 +1,5 @@
 import { Box, IconButton, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import { socket } from '../socket'
 import { useNavigate } from 'react-router-dom'
 import { useRoom, useSelf } from '../app-state/store'
@@ -19,7 +18,7 @@ const RoomSelection = () => {
     setCreateCode(e.target.value)
     socket.connect()
     socket.emit('createRoom',{name: name,code:createCode},(data)=>{
-      if(data==0){
+      if(data===0){
         setIsInRoom(!isInRoom)
         setCode(createCode)
         console.log(data)
@@ -32,8 +31,7 @@ const RoomSelection = () => {
   const handleJoinRoom = (e) => {
     socket.connect()
     socket.emit('joinRoom',{name: name,code:joinCode},(data)=>{
-      if(data!=-1){
-        console.error('running set',isInRoom)
+      if(data!==-1){
         setIsInRoom(!isInRoom)
         setCode(joinCode)
         console.log(data)

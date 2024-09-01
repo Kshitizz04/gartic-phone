@@ -8,7 +8,7 @@ const io = require('socket.io')(7070,{
 });
 
 let rooms = [
-	// {code: 20,players:[{id: id,name: name},{id: id,name: name}]}                   
+	// {code: 20,players:[{id: id,name: name},{id: id,name: name}]}                     	         	 
 ]
 
 io.on('connection',(socket)=>{ 
