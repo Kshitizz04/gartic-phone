@@ -83,7 +83,7 @@ const Game = () => {
     }
 
     socket.on('recieveCanvas', (data)=>{
-        if((data.id===numPlayers-1) && id==0){
+        if((data.id===numPlayers-1) && id===0){
             game.setImage(data.url)
         }
         else if(id === data.id+1){
@@ -93,10 +93,10 @@ const Game = () => {
 
     socket.on('recievePrompt', (data)=>{
         console.log('myID= ',id, 'player ID= ', data.id, 'num players= ', numPlayers)
-        if((data.id==numPlayers-1) && id==0){
+        if((data.id===numPlayers-1) && id===0){
             game.setPrompt(data.prompt)
         }
-        else if(id == data.id+1){
+        else if(id === data.id+1){
             game.setPrompt(data.prompt)
         }
     })

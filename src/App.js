@@ -1,7 +1,5 @@
 import { Box } from "@mui/material";
-import { useState } from "react";
 import React from 'react'
-import styled from "styled-components";
 import { Route, Routes } from 'react-router-dom';
 import DashBoard from "./pages/DashBoard";
 import Lobby from "./pages/Lobby";

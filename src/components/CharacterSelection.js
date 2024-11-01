@@ -2,42 +2,83 @@ import { Box, Button, Card, CardActions, CardContent, CardMedia, IconButton, Tex
 import React, { useState } from 'react'
 import {  useNavigate } from 'react-router-dom'
 import { useSelf } from '../app-state/store'
+import Character from '../Images/Character.png';
+import styled from 'styled-components';
 
 const CharacterSelection = () => {
     const navigate = useNavigate()
     let name = ""
     const setName = useSelf((state)=>{return state.setName})
 
+    const StyledTextField = styled(TextField)({
+        width:'100%',
+        color:'rgba(255, 255, 255, .8)',
+        backgroundColor:'rgba(255, 255, 255, .3)',
+        border: '2px solid rgba(255, 255, 255, .8)',
+        borderRadius: '2px',
+        input: {color:'rgba(255, 255, 255, .8)', fontFamily:'"Itim", cursive'},
+        "&. css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input":{
+            padding:'2px',
+        },
+        "& .MuiOutlinedInput-root":{
+            "&.Mui-focused fieldset":{
+                border:'none',
+            }
+        }
+    })
+
     return (
-        <Box sx={{height:'75%', width:'40%', border:'2px solid black'}}>
-            <Card sx={{width:'100%', height:'100%'}} >
-                <CardMedia
-                    sx={{ height: '70%' }}
-                    image="https://img.freepik.com/premium-vector/anonim-gamer-controller-anonymous-gamer-gaming-digital-game-man-technology_165162-737.jpg"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                    Enter Name
-                    </Typography>
-                    <TextField
+        <Box sx={{
+            height:'75%', 
+            width:'55%', 
+            backgroundColor:'rgba(80,24,81,.25)',
+            borderRadius:'10px'
+        }}>
+            <Box sx={{
+                height:'15%',
+                width:'100%',
+                display:'flex',
+                justifyContent:'center',
+                alignItems: 'center'
+            }}>
+                <Typography fontSize={'40px'} color={'#5cffb6'} sx={{textShadow:'-1px -1px 0px black,1px -1px 0px black,-1px 1px 0px black,1px 1px 0px black', fontFamily:'"Itim", cursive'}}>Get Started</Typography>
+            </Box>
+
+            <Box sx={{
+                height:'70%',
+                width:'100%',
+                display:'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}
+            >
+                <img src={Character} style={{height:'70%', width:'30%', objectFit:'contain',marginRight:'10%'}}/>
+                <Box sx={{width:'50%',display:'flex', justifyContent:'center',alignItems:'center',height:'70%', flexDirection:'column'}}>
+                    <Typography fontFamily={'"Itim", cursive'} color={'white'} fontSize={'40px'} width={'100%'}>Choose a nickname</Typography>
+                    <StyledTextField
                         autoFocus
-                        label="Name..."
-                        sx={{ width: '100%' }}
                         onChange={(e)=>{name = e.target.value}}
-                        InputProps={{
-                            endAdornment: 
-                                <IconButton 
-                                    onClick={()=>{
-                                        setName(name)
-                                        navigate('/lobby')
-                                    }}
-                                >   
-                                    Start
-                                </IconButton>,
-                        }}
-                    />
-                </CardContent>
-            </Card>
+                    >
+                    </StyledTextField>
+                </Box>
+            </Box>
+
+            <Box sx={{
+                height:'15%',
+                width:'100%',
+                display:'flex',
+                justifyContent:'center',
+                alignItems: 'center'
+            }}>
+                <Button onClick={()=>{
+                    setName(name)
+                    navigate('/lobby')
+                }}
+                sx={{backgroundColor:'white', color:'blue'}}
+                >
+                    <Typography fontFamily={'"Itim", cursive'} color={'darkblue'} fontSize={'20px'} width={'100%'}>Start</Typography>
+                </Button>
+            </Box>
         </Box>
     )
 }
