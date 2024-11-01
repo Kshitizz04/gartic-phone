@@ -7,11 +7,11 @@ const io = require('socket.io')(7070,{
 	}
 });
 
-let rooms = [
+let rooms = [     
 	// {
 	// 	code: 20,
 	// 	players:[{id: id,name: name},{id: id,name: name}], 
-	//  playerTurns: {0: 0, 1: 0, 2: 0, 3: 0, 4: 0}
+	//  playerTurns: {0: 0, 1: 0, 2: 0, 3: 0, 4: 0},
 	// 	game:{
 	// 			0: {
 	// 				0: "prompt1", 
@@ -44,7 +44,7 @@ io.on('connection',(socket)=>{
 			socket.join(data.code);
 			io.in(data.code).emit('lobbyUpdate', rooms[0].players) 
 			cb(0);    
-			console.log(rooms);
+			//console.log(rooms);
 		} 
 	}) 
 
@@ -62,7 +62,7 @@ io.on('connection',(socket)=>{
 			socket.join(data.code);
 			io.in(data.code).emit('lobbyUpdate', rooms[success].players)  
 			cb(id);  
-			console.log(rooms)
+			//console.log(rooms)
 		} 
 	})
 
@@ -79,8 +79,18 @@ io.on('connection',(socket)=>{
 
 		rooms[room].game[update][data.id] = data.url;
 		rooms[room].playerTurns[data.id]=turn+1; 
+
+		//Round is over when roundOver becomes player count
+		let roundsOver = Object.values(rooms[room].playerTurns).every((turn)=>{
+			return turn===rooms[room].players.length;
+		})
+		console.log(rooms[room].playerTurns,roundsOver) 
+		if(roundsOver){ 
+			io.in(data.room).emit('roundOver', rooms[room].game)     
+		}
+
 		io.in(data.room).emit('recieveCanvas',{id: data.id, url: data.url})
-		console.log(rooms[room].game) 
+		//console.log(rooms[room].game) 
 	})
 
 	socket.on('sendPrompt',(data)=>{
@@ -97,7 +107,7 @@ io.on('connection',(socket)=>{
 		rooms[room].game[update][data.id] = data.prompt;
 		rooms[room].playerTurns[data.id]=turn+1;
 		io.in(data.room).emit('recievePrompt', {id: data.id, prompt: data.prompt})
-		console.log(rooms[room].game)
+		//console.log(rooms[room].game)
 	})               
 })  
 

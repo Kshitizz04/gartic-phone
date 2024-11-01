@@ -5,6 +5,7 @@ import Players from '../components/Players';
 import Canvas from '../components/Canvas';
 import { useGame, useRoom, useSelf } from '../app-state/store';
 import { socket } from '../socket';
+import { useNavigate } from 'react-router-dom';
 
 const MainBox = styled(Box)({
     height: '90%',
@@ -18,12 +19,16 @@ const MainBox = styled(Box)({
 const Game = () => {
 
     const game = useGame((state)=>{return state})
-    console.log("isDraw",game)
+    const navigate = useNavigate()
     const players = useRoom((state)=>{return state.players})
     const roomCode = useRoom((state)=>{return state.code})
     const numPlayers = players.length
     const id = useSelf((state)=>{return state.id})
-    const [myPrompt,setMyPrompt] = useState("")
+    const [myPrompt,setMyPrompt] = useState("") 
+
+    socket.on('roundOver', (data)=>{
+        navigate('/diaries',{state:{data}})
+    })
 
     const PromptDisplay = ()=>{
         return(
