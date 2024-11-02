@@ -28,15 +28,11 @@ const TitleBox = styled(Box)({
 const DashBoard = () => {
 
     return(
-        <MainBox>
-            <TitleBox>
-                <img src={Logo} alt='logo'style={{objectFit:'contain', height:'100%', width:'100%'}}/>
-            </TitleBox>
-            <Box sx={{width:'100%',height:'75%',display:'flex', justifyContent:'space-around',alignItems:'center'}}>
-                <CharacterSelection/>
-                <Rules/>
-            </Box>
-        </MainBox> 
+        
+        <Box sx={{width:'100%',height:'75%',display:'flex', justifyContent:'space-around',alignItems:'center'}}>
+            <CharacterSelection/>
+            <Rules/>
+        </Box>
     )
 }
 

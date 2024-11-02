@@ -4,21 +4,12 @@ import Players from '../components/Players'
 import styled from 'styled-components'
 import RoomSelection from '../components/RoomSelection'
 
-const MainBox = styled(Box)({
-    height: '90%',
-    width: '80%',
-    border: '1px solid',
-    display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-})
-
 const Lobby = () => {
     return (
-        <MainBox>
+        <Box sx={{width:'100%',height:'75%',display:'flex', justifyContent:'space-around',alignItems:'center'}}>
             <Players/>
             <RoomSelection/>
-        </MainBox>
+        </Box>
     )
 }
 

@@ -18,7 +18,9 @@ export const useGame = create((set)=>({
     isDraw: false,
     image: "",
     prompt: "",
-    setIsDraw: ()=>{set((state)=>{return {isDraw: !state.isDraw, image: state.image,prompt: state.prompt}})},
+    round:1,
+    setRound: ()=>{set((state)=>{return {isDraw: state.isDraw, image: state.image,prompt: state.prompt, round: state.round+1}})},
+    setIsDraw: ()=>{set((state)=>{return {isDraw: !state.isDraw, image: state.image,prompt: state.prompt, round: state.round}})},
     setImage: (url)=>{set({image:url})},
     setPrompt: (prompt)=>{set({prompt: prompt})},
 }))

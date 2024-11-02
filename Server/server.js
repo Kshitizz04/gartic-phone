@@ -60,7 +60,7 @@ io.on('connection',(socket)=>{
 			rooms[success].players.push({id: id, name: data.name});
 			rooms[success].playerTurns[id] = 0;  
 			socket.join(data.code);
-			io.in(data.code).emit('lobbyUpdate', rooms[success].players)  
+			io.in(data.code).emit('lobbyUpdate', rooms[success].players)        
 			cb(id);  
 			//console.log(rooms)
 		} 

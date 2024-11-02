@@ -5,27 +5,29 @@ import { useSelf } from '../app-state/store'
 import Character from '../Images/Character.png';
 import styled from 'styled-components';
 
+const StyledTextField = styled(TextField)({
+    width:'100%',
+    backgroundColor:'rgba(255, 255, 255, .3)',
+    border: '100px solid rgba(255, 255, 255, .7)',
+    borderRadius: '2px',
+    input: {color:'rgba(255, 255, 255, .8)', fontFamily:'"Itim", cursive'},
+    ":hover":{
+        border: '0px',
+    },
+    "&. css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input":{
+        padding:'2px',
+    },
+    "& .MuiOutlinedInput-root":{
+        "&.Mui-focused fieldset":{
+            border:'2px solid rgba(255, 255, 255, .7)',
+        }
+    }
+})
+
 const CharacterSelection = () => {
     const navigate = useNavigate()
     let name = ""
     const setName = useSelf((state)=>{return state.setName})
-
-    const StyledTextField = styled(TextField)({
-        width:'100%',
-        color:'rgba(255, 255, 255, .8)',
-        backgroundColor:'rgba(255, 255, 255, .3)',
-        border: '2px solid rgba(255, 255, 255, .8)',
-        borderRadius: '2px',
-        input: {color:'rgba(255, 255, 255, .8)', fontFamily:'"Itim", cursive'},
-        "&. css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input":{
-            padding:'2px',
-        },
-        "& .MuiOutlinedInput-root":{
-            "&.Mui-focused fieldset":{
-                border:'none',
-            }
-        }
-    })
 
     return (
         <Box sx={{
@@ -56,7 +58,6 @@ const CharacterSelection = () => {
                 <Box sx={{width:'50%',display:'flex', justifyContent:'center',alignItems:'center',height:'70%', flexDirection:'column'}}>
                     <Typography fontFamily={'"Itim", cursive'} color={'white'} fontSize={'40px'} width={'100%'}>Choose a nickname</Typography>
                     <StyledTextField
-                        autoFocus
                         onChange={(e)=>{name = e.target.value}}
                     >
                     </StyledTextField>
@@ -76,7 +77,7 @@ const CharacterSelection = () => {
                 }}
                 sx={{backgroundColor:'white', color:'blue'}}
                 >
-                    <Typography fontFamily={'"Itim", cursive'} color={'darkblue'} fontSize={'20px'} width={'100%'}>Start</Typography>
+                    <Typography fontFamily={'"Itim", cursive'} color={'darkblue'} fontSize={'20px'}>Start</Typography>
                 </Button>
             </Box>
         </Box>
