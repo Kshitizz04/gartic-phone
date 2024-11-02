@@ -84,7 +84,7 @@ io.on('connection',(socket)=>{
 		let roundsOver = Object.values(rooms[room].playerTurns).every((turn)=>{
 			return turn===rooms[room].players.length;
 		})
-		console.log(rooms[room].playerTurns,roundsOver) 
+		//console.log(rooms[room].playerTurns,roundsOver)   
 		if(roundsOver){ 
 			io.in(data.room).emit('roundOver', rooms[room].game)     
 		}
@@ -106,6 +106,16 @@ io.on('connection',(socket)=>{
 		 
 		rooms[room].game[update][data.id] = data.prompt;
 		rooms[room].playerTurns[data.id]=turn+1;
+
+		//Round is over when roundOver becomes player count
+		let roundsOver = Object.values(rooms[room].playerTurns).every((turn)=>{
+			return turn===rooms[room].players.length;
+		})
+		//console.log(rooms[room].playerTurns,roundsOver)   
+		if(roundsOver){ 
+			io.in(data.room).emit('roundOver', rooms[room].game)     
+		}
+		 
 		io.in(data.room).emit('recievePrompt', {id: data.id, prompt: data.prompt})
 		//console.log(rooms[room].game)
 	})               

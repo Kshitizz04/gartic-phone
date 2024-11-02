@@ -71,6 +71,7 @@ const PromptScreen = () => {
 
         <Box sx={{width:'100%'}}>
           <StyledTextField
+            autoFocus
             value = {myPrompt}
             onChange = {(e)=>{setMyPrompt(e.target.value)}}
           />
