@@ -29,6 +29,23 @@ const CharacterSelection = () => {
     let name = ""
     const setName = useSelf((state)=>{return state.setName})
 
+    const StyledTextField = styled(TextField)({
+        width:'100%',
+        color:'rgba(255, 255, 255, .8)',
+        backgroundColor:'rgba(255, 255, 255, .3)',
+        border: '2px solid rgba(255, 255, 255, .8)',
+        borderRadius: '2px',
+        input: {color:'rgba(255, 255, 255, .8)', fontFamily:'"Itim", cursive'},
+        "&. css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input":{
+            padding:'2px',
+        },
+        "& .MuiOutlinedInput-root":{
+            "&.Mui-focused fieldset":{
+                border:'none',
+            }
+        }
+    })
+
     return (
         <Box sx={{
             height:'75%', 
