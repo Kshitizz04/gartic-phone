@@ -1,8 +1,6 @@
-import { Box, IconButton, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react'
-import styled from 'styled-components';
+import { Box } from '@mui/material';
+import React from 'react'
 import Players from '../components/Players';
-import Canvas from '../components/Canvas';
 import { useGame, useRoom, useSelf } from '../app-state/store';
 import { socket } from '../socket';
 import { useNavigate } from 'react-router-dom';

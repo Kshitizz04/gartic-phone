@@ -1,9 +1,9 @@
-import { Box, Button, IconButton, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Box, Button, IconButton, Typography } from '@mui/material';
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components';
 import Players from '../components/Players';
-import { useGame, useRoom } from '../app-state/store';
+import {useRoom } from '../app-state/store';
 
 const MainBox = styled(Box)({
   height:'95%', 

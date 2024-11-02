@@ -1,7 +1,6 @@
 import { Box } from '@mui/material'
 import React from 'react'
 import Players from '../components/Players'
-import styled from 'styled-components'
 import RoomSelection from '../components/RoomSelection'
 
 const Lobby = () => {

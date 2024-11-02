@@ -105,7 +105,7 @@ const PromptScreen = () => {
             flexDirection: 'column',
         }}
     >
-      {game.round==1 ? <RoundOneScrean/> : <RegularScreen/>}
+      {game.round===1 ? <RoundOneScrean/> : <RegularScreen/>}
     </Box>
   )
 }

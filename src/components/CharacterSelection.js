@@ -1,5 +1,5 @@
-import { Box, Button, Card, CardActions, CardContent, CardMedia, IconButton, TextField, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import { Box, Button, TextField, Typography } from '@mui/material'
+import React from 'react'
 import {  useNavigate } from 'react-router-dom'
 import { useSelf } from '../app-state/store'
 import Character from '../Images/Character.png';
@@ -29,23 +29,6 @@ const CharacterSelection = () => {
     let name = ""
     const setName = useSelf((state)=>{return state.setName})
 
-    const StyledTextField = styled(TextField)({
-        width:'100%',
-        color:'rgba(255, 255, 255, .8)',
-        backgroundColor:'rgba(255, 255, 255, .3)',
-        border: '2px solid rgba(255, 255, 255, .8)',
-        borderRadius: '2px',
-        input: {color:'rgba(255, 255, 255, .8)', fontFamily:'"Itim", cursive'},
-        "&. css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input":{
-            padding:'2px',
-        },
-        "& .MuiOutlinedInput-root":{
-            "&.Mui-focused fieldset":{
-                border:'none',
-            }
-        }
-    })
-
     return (
         <Box sx={{
             height:'75%', 
@@ -71,7 +54,7 @@ const CharacterSelection = () => {
                 alignItems: 'center'
             }}
             >
-                <img src={Character} style={{height:'70%', width:'30%', objectFit:'contain',marginRight:'10%'}}/>
+                <img src={Character} style={{height:'70%', width:'30%', objectFit:'contain',marginRight:'10%'}} alt=''/>
                 <Box sx={{width:'50%',display:'flex', justifyContent:'center',alignItems:'center',height:'70%', flexDirection:'column'}}>
                     <Typography fontFamily={'"Itim", cursive'} color={'white'} fontSize={'40px'} width={'100%'}>Choose a nickname</Typography>
                     <StyledTextField
