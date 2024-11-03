@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* height: 100vh;
   width: 100vw; */
-  background-image: url('C:\Kshitiz\Projects\gartic-phone\src\Images\BackGround.png');
+  background-image: url('./Images/BackGround.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat; 
