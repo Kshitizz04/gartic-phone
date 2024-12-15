@@ -3,11 +3,11 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const PORT =  process.env.PORT || 7070
-const clientUrl = process.env.CLIENT_URL || 'http://localhost:3000';
+const clientUrl = process.env.CLIENT_URL || "http://localhost:3000";
 
 const io = require('socket.io')(PORT,{
 	cors:{
-		origin: ["https://admin.socket.io",clientUrl],        
+		origin: ["https://admin.socket.io",clientUrl, "http://localhost:3000", "https://gartic-phone-smoky.vercel.app/"],        
     	credentials: true 
 	}
 });
