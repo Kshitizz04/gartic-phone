@@ -32,6 +32,14 @@ const RoomSelection = () => {
   const setCode = useRoom((state)=>{return state.setCode})
   const setId = useSelf((state)=>{return state.setId})
 
+
+  const roomCode = useRoom((state)=>{return state.code})
+  const id = useSelf((state)=>{return state.id}) 
+  const handleDisconnect = ()=>{
+    socket.emit('client_disconnected',{id:id, code:roomCode});
+    socket.disconnect();
+  }
+
   const handleCreateRoom = (e) => {
     setCreateCode(e.target.value)
     socket.connect()
@@ -131,6 +139,11 @@ const RoomSelection = () => {
         <IconButton onClick={()=>{handlePlay()}}>
           <Button sx={{backgroundColor:'white', color:'blue'}}>
             <Typography fontFamily={'"Itim", cursive'} color={'darkblue'} fontSize={'20px'}>Play</Typography>
+          </Button>
+        </IconButton>
+        <IconButton onClick={()=>{handleDisconnect()}}>
+          <Button sx={{backgroundColor:'white', color:'blue'}}>
+            <Typography fontFamily={'"Itim", cursive'} color={'darkblue'} fontSize={'20px'}>Disconnect</Typography>
           </Button>
         </IconButton>
       </Box>

@@ -7,6 +7,11 @@ import Game from "./pages/Game";
 import Diaries from "./pages/Diaries";
 import styled from "styled-components";
 import Logo from './Images/Logo.webp';
+import { socket } from "./socket";
+import { useRoom, useSelf } from "./app-state/store";
+
+
+
 
 const MainBox = styled(Box)({
   height: '90%',
@@ -29,6 +34,14 @@ const TitleBox = styled(Box)({
 })
 
 function App() {
+
+  const roomCode = useRoom((state)=>{return state.code})
+  const id = useSelf((state)=>{return state.id})
+
+  window.addEventListener('beforeunload',()=>{
+    socket.emit('client_disconnected',{id:id, code:roomCode});
+    socket.disconnect();
+  })
   
   return ( 
     <Box sx={{

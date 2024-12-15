@@ -1,11 +1,15 @@
 const { instrument } = require('@socket.io/admin-ui');
 
-const io = require('socket.io')(7070,{
+const PORT =  process.env.PORT || 7070
+
+const io = require('socket.io')(PORT,{
 	cors:{
 		origin: ["https://admin.socket.io","http://localhost:3000"],        
     	credentials: true 
 	}
 });
+
+console.log(`Server listening on ${PORT}`)
 
 let rooms = [     
 	// {
@@ -118,7 +122,19 @@ io.on('connection',(socket)=>{
 		 
 		io.in(data.room).emit('recievePrompt', {id: data.id, prompt: data.prompt})
 		//console.log(rooms[room].game)
-	})               
+	}) 
+
+	socket.on('client_disconnected',(data)=>{
+		const room = rooms.findIndex((room)=>{
+			return room.code == data.code
+		})
+		console.log(room,rooms[room].players,rooms[room].playerTurns,rooms[room].game) 
+
+		rooms[room].players.splice(data.id,1);
+		delete rooms[room].playerTurns[data.id]
+
+		console.log(room,rooms[room].code,rooms[room].players,rooms[room].playerTurns,rooms[room].game)  
+	}) 
 })  
 
 instrument(io, { 
