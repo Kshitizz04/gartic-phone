@@ -9,7 +9,8 @@ const io = require('socket.io')(PORT,{
 	cors:{
 		origin: ["https://admin.socket.io",clientUrl, "http://localhost:3000", "https://gartic-phone-smoky.vercel.app"],        
     	credentials: true 
-	}
+	},
+	transports: ["websocket", "polling"],
 });
 
 console.log(`Server listening on ${PORT}`)
